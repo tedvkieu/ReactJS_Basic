@@ -9,7 +9,7 @@ class MyComponent extends React.Component {
 
     handleClick = (event) => {
         console.log('click me my button');
-        console.log('My name is ', this.state.name);
+        console.log('Random', this.state.name);
         this.setState({
             name: 'HAnh',
             age: Math.floor(Math.random() * 100 + 1),
@@ -18,18 +18,28 @@ class MyComponent extends React.Component {
     handleOnMoverOver(event) {
         console.log(event);
     }
+
+    handleOnChangeInput = (event) => {
+        this.setState({
+            name: event.target.value,
+        });
+    };
+    handleOnSubmit = (event) => {
+        event.preventDefault();
+        console.log(this.state);
+    };
     //JSX : chỉ có React có. Cho phép code JS ngay trong HTML
     render() {
         return (
             <div>
                 My name is {this.state.name} and I'm {this.state.age}
-                <button
-                    onClick={(event) => {
-                        this.handleClick(event);
-                    }}>
-                    Click me!
-                </button>
-                <button onMouseOver={this.handleOnMoverOver}>Hover me!</button>
+                <form onSubmit={(event) => this.handleOnSubmit(event)}>
+                    <input
+                        typr="text"
+                        onChange={(event) => this.handleOnChangeInput(event)}
+                    />
+                    <button>Submit</button>
+                </form>
             </div>
         );
     }
