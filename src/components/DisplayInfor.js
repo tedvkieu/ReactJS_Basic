@@ -4,12 +4,20 @@ import MyComponent from './MyComponent';
 
 class DisplayInfor extends React.Component {
     render() {
-        console.log(this.props);
-        const { age, name } = this.props;
+        const { listUser } = this.props;
+
         return (
             <div>
-                <div>My name's {name}</div>
-                <div>My age's {age}</div>
+                {listUser.map((item) => {
+                    console.log(item);
+                    return (
+                        <div key={item.id}>
+                            <div>My name's {item.name}</div>
+                            <div>My age's {item.age}</div>
+                            <hr></hr>
+                        </div>
+                    );
+                })}
             </div>
         );
     }

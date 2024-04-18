@@ -3,20 +3,23 @@ import UserInfor from './Userinfor';
 import DisplayInfor from './DisplayInfor';
 
 class MyComponent extends React.Component {
+    state = {
+        listUsers: [
+            { id: 1, name: 'Kieu ne', age: 21 },
+            { id: 2, name: 'Gon', age: 22 },
+            { id: 3, name: 'Tedvkieu', age: 23 },
+        ],
+    };
     //JSX : chỉ có React có. Cho phép code JS ngay trong HTML
     render() {
-        const myAge = 25;
-        const myInfor = ['ab', 'c', 'd'];
+        // Dry: Don't repeat yourselt
         return (
             <div>
                 <UserInfor></UserInfor>
                 <br></br>
-                <DisplayInfor name="Duong Van Kieu" age="21"></DisplayInfor>
+
                 <hr></hr>
-                <DisplayInfor
-                    name="Kiure"
-                    age={myAge}
-                    myInfor={myInfor}></DisplayInfor>
+                <DisplayInfor listUser={this.state.listUsers}></DisplayInfor>
             </div>
         );
     }
