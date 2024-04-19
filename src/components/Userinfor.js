@@ -7,6 +7,12 @@ class UserInfor extends React.Component {
         age: 21,
     };
 
+    state1 = {
+        name: 'Hanoi',
+        address: 'Hanoi',
+        age: 20,
+    };
+
     handleClick = (event) => {
         console.log('click me my button');
         console.log('Random', this.state.name);
@@ -33,24 +39,51 @@ class UserInfor extends React.Component {
         event.preventDefault();
         console.log(this.state);
     };
+    // render() {
+    //     return (
+    //         <div>
+    //             My name is {this.state.name} and I'm {this.state.age}
+    //             <form onSubmit={(event) => this.handleOnSubmit(event)}>
+    //                 <label>Your name: </label>
+    //                 <input
+    //                     value={this.state.name}
+    //                     type="text"
+    //                     onChange={(event) => this.handleOnChangeInput(event)}
+    //                 />
+    //                 <button>Submit</button>
+
+    //                 <label>Your age: </label>
+    //                 <input
+    //                     value={this.state.age}
+    //                     type="text"
+    //                     onChange={(event) => this.handleOnChangeAge(event)}
+    //                 />
+    //                 <button>Submit</button>
+    //             </form>
+    //         </div>
+    //     );
+    // }
     render() {
         return (
             <div>
-                My name is {this.state.name} and I'm {this.state.age}
+                <h5>My name is {this.state.name}</h5>
+                <h5>I'm {this.state.age} years old</h5>
+
                 <form onSubmit={(event) => this.handleOnSubmit(event)}>
                     <label>Your name: </label>
                     <input
                         value={this.state.name}
-                        type="text"
-                        onChange={(event) => this.handleOnChangeInput(event)}
+                        onChange={(event) => {
+                            this.handleOnChangeInput(event);
+                        }}
                     />
                     <button>Submit</button>
-
                     <label>Your age: </label>
                     <input
                         value={this.state.age}
-                        type="text"
-                        onChange={(event) => this.handleOnChangeAge(event)}
+                        onChange={(event) => {
+                            this.handleOnChangeAge(event);
+                        }}
                     />
                     <button>Submit</button>
                 </form>
