@@ -18,7 +18,7 @@ class DisplayInfor extends React.Component {
         return (
             <div className="displayInfor-container">
                 <img src={logo1} />
-                <div>
+                <div key={this.state.isShowListUser}>
                     <span
                         onClick={() => {
                             this.handleShowHide();
@@ -30,18 +30,29 @@ class DisplayInfor extends React.Component {
                 </div>
                 {this.state.isShowListUser && (
                     <div>
-                        {listUser.map((item) => {
+                        {listUser.map((item, index) => {
                             return (
-                                <div>
-                                    <div
-                                        key={item.id}
-                                        className={
-                                            +item.age > 18 ? 'green' : 'red'
-                                        }>
+                                <div
+                                    key={item.id}
+                                    className={
+                                        +item.age > 18 ? 'green' : 'red'
+                                    }>
+                                    <div>
                                         <div>My name's {item.name}</div>
                                         <div>My age's {item.age}</div>
-                                        <hr></hr>
                                     </div>
+
+                                    <div>
+                                        <button
+                                            onClick={() =>
+                                                this.props.handleDeleteUser(
+                                                    item.id
+                                                )
+                                            }>
+                                            Delete
+                                        </button>
+                                    </div>
+                                    <hr />
                                 </div>
                             );
                         })}

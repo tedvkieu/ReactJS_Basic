@@ -14,14 +14,16 @@ class MyComponent extends React.Component {
     handleAddNewUser = (userObj) => {
         //Cach 1
         this.setState({
-            listUsers: [...this.state.listUsers, userObj], // copy lai trang thai mang dang co
+            listUsers: [userObj, ...this.state.listUsers], // copy lai trang thai mang dang co
         });
-        // ---------------------------- cach 2
-        // let listUserClone = [...this.state.listUsers];
-        // listUserClone.unshift(userObj);
-        // this.setState({
-        //     listUsers: listUserClone,
-        // });
+    };
+    handleDeleteUser = (userId) => {
+        //let listUserClone = { ...this.state.listUsers };
+        let listUsersClone = this.state.listUsers;
+        listUsersClone = listUsersClone.filter((item) => item.id !== userId);
+        this.setState({
+            listUsers: listUsersClone,
+        });
     };
     //JSX : chỉ có React có. Cho phép code JS ngay trong HTML
     render() {
@@ -35,7 +37,8 @@ class MyComponent extends React.Component {
 
                     <hr></hr>
                     <DisplayInfor
-                        listUser={this.state.listUsers}></DisplayInfor>
+                        listUser={this.state.listUsers}
+                        handleDeleteUser={this.handleDeleteUser}></DisplayInfor>
                 </div>
                 <div className="b"></div>
             </>
