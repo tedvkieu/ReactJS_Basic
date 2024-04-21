@@ -3,9 +3,13 @@ import './DisplayInfor.scss';
 import logo1 from './../logo.svg';
 
 class DisplayInfor extends React.Component {
-    state = {
-        isShowListUser: true,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            isShowListUser: true,
+        };
+    }
+
     handleShowHide = () => {
         this.setState({
             isShowListUser: !this.state.isShowListUser,
