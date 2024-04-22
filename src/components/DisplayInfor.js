@@ -4,6 +4,7 @@ import logo1 from './../logo.svg';
 
 class DisplayInfor extends React.Component {
     constructor(props) {
+        console.log('Call constructor: ', 0);
         super(props);
         this.state = {
             isShowListUser: true,
@@ -16,7 +17,24 @@ class DisplayInfor extends React.Component {
         });
     };
 
+    componentDidMount() {
+        console.log('Call me component did mount ');
+        setTimeout(() => {
+            document.title = 'Kieu';
+        }, 3000);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('Call me component did update ', this.props, prevProps);
+        if (this.props.listUser !== prevProps.listUser) {
+            if (this.props.listUser.length === 5) {
+                alert('You got 5 users');
+            }
+        }
+    }
+
     render() {
+        console.log('call me render ');
         const { listUser } = this.props;
         console.log(listUser);
         return (
