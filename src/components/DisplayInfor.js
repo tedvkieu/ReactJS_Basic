@@ -1,87 +1,97 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './DisplayInfor.scss';
 import logo1 from './../logo.svg';
 
-class DisplayInfor extends React.Component {
-    constructor(props) {
-        console.log('Call constructor: ', 0);
-        super(props);
-        this.state = {
-            isShowListUser: true,
-        };
-    }
+// class DisplayInfor extends React.Component {
+//     render() {
+//         console.log('call me render ');
+//         const { listUser } = this.props;
+//         console.log(listUser);
+//         return (
+//             <div className="displayInfor-container">
+//                 {true && (
+//                     <>
+//                         {listUser.map((item, index) => {
+//                             return (
+//                                 <div
+//                                     key={item.id}
+//                                     className={
+//                                         +item.age > 18 ? 'green' : 'red'
+//                                     }>
+//                                     <div>
+//                                         <div>My name's {item.name}</div>
+//                                         <div>My age's {item.age}</div>
+//                                     </div>
 
-    handleShowHide = () => {
-        this.setState({
-            isShowListUser: !this.state.isShowListUser,
-        });
+//                                     <div>
+//                                         <button
+//                                             onClick={() =>
+//                                                 this.props.handleDeleteUser(
+//                                                     item.id
+//                                                 )
+//                                             }>
+//                                             Delete
+//                                         </button>
+//                                     </div>
+//                                     <hr />
+//                                 </div>
+//                             );
+//                         })}
+//                     </>
+//                 )}
+//             </div>
+//         );
+//     }
+// }
+
+const DisplayInfor = (props) => {
+    const { listUser } = props;
+
+    const [isShowHideListUser, setShowHideListUser] = useState(true);
+
+    // this.state = {
+    //     isShowHideListUser: true,
+    // };
+    const handleShowHideListUser = () => {
+        setShowHideListUser(!isShowHideListUser);
     };
-
-    componentDidMount() {
-        console.log('Call me component did mount ');
-        setTimeout(() => {
-            document.title = 'Kieu';
-        }, 3000);
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('Call me component did update ', this.props, prevProps);
-        if (this.props.listUser !== prevProps.listUser) {
-            if (this.props.listUser.length === 5) {
-                alert('You got 5 users');
-            }
-        }
-    }
-
-    render() {
-        console.log('call me render ');
-        const { listUser } = this.props;
-        console.log(listUser);
-        return (
-            <div className="displayInfor-container">
-                <img src={logo1} />
-                <div key={this.state.isShowListUser}>
-                    <span
-                        onClick={() => {
-                            this.handleShowHide();
-                        }}>
-                        {this.state.isShowListUser === true
-                            ? 'Hide List User'
-                            : 'Show List User'}
-                    </span>
-                </div>
-                {this.state.isShowListUser && (
-                    <div>
-                        {listUser.map((item, index) => {
-                            return (
-                                <div
-                                    key={item.id}
-                                    className={
-                                        +item.age > 18 ? 'green' : 'red'
-                                    }>
-                                    <div>
-                                        <div>My name's {item.name}</div>
-                                        <div>My age's {item.age}</div>
-                                    </div>
-
-                                    <div>
-                                        <button
-                                            onClick={() =>
-                                                this.props.handleDeleteUser(
-                                                    item.id
-                                                )
-                                            }>
-                                            Delete
-                                        </button>
-                                    </div>
-                                    <hr />
-                                </div>
-                            );
-                        })}
-                    </div>
-                )}
+    return (
+        <div className="displayInfor-container">
+            <div>
+                <span onClick={() => handleShowHideListUser()}>
+                    {isShowHideListUser === true
+                        ? 'Hide List Users'
+                        : 'Show List User'}
+                </span>
             </div>
-        );
-    }
-}
+            {isShowHideListUser && (
+                <>
+                    {listUser.map((item, index) => {
+                        return (
+                            <div
+                                key={item.id}
+                                className={+item.age > 18 ? 'green' : 'red'}>
+                                <div>
+                                    <div>My name's {item.name}</div>
+                                    <div>My age's {item.age}</div>
+                                </div>
+
+                                <div>
+                                    <button
+                                        onClick={() =>
+                                            props.handleDeleteUser(item.id)
+                                        }>
+                                        Delete
+                                    </button>
+                                </div>
+                                <hr />
+                            </div>
+                        );
+                    })}
+                </>
+            )}
+        </div>
+    );
+};
+
 export default DisplayInfor;
