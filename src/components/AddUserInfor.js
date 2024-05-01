@@ -33,7 +33,7 @@ const AddUserInfor = (props) => {
                         handleOnChangeInput(event);
                     }}
                 />
-                <button>Submit</button>
+
                 <label>Your age: </label>
                 <input
                     value={age}
