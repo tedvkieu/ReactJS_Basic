@@ -18,7 +18,7 @@ import {
     FaHeart,
 } from 'react-icons/fa';
 import { DiReact } from 'react-icons/di';
-import { MdDashboard } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import sidebarBg from '../../assets/bg2.jpg';
 import './SideBar.scss';
 
@@ -53,11 +53,16 @@ const SideBar = (props) => {
                     <Menu iconShape="circle">
                         <MenuItem icon={<FaTachometerAlt />}>
                             Dashboard
+                            <Link to="/admin" />
                         </MenuItem>
                     </Menu>
                     <Menu iconShape="circle">
                         <SubMenu icon={<FaGem />} title="Features">
-                            <MenuItem> Quan Ly Users</MenuItem>
+                            <MenuItem>
+                               
+                                Quan Ly Users
+                                <Link to="/admin/manage-user" />
+                            </MenuItem>
                             <MenuItem> Quan Ly Bai Quiz</MenuItem>
                             <MenuItem> Quan Ly Cau Hoi</MenuItem>
                         </SubMenu>
