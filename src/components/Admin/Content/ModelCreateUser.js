@@ -1,14 +1,12 @@
 import { eventWrapper } from '@testing-library/user-event/dist/utils';
+import axios from 'axios';
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from 'react-icons/fc';
 
 const ModelCreateUser = (props) => {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const { show, setShow } = props;
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,6 +15,15 @@ const ModelCreateUser = (props) => {
     const [role, setRole] = useState('USER');
     const [previewImg, setPreviewImg] = useState('');
 
+    const handleClose = () => {
+        setShow(false);
+        setEmail('');
+        setPassword('');
+        setImage('');
+        setUsername('');
+        setRole('USER');
+        setPreviewImg('');
+    };
     const handleUploadImage = (event) => {
         if (event.target.files && event.target && event.target.files[0]) {
             setPreviewImg(URL.createObjectURL(event.target.files[0]));
@@ -26,12 +33,33 @@ const ModelCreateUser = (props) => {
         }
     };
 
+    const handleSubmitCreateUser = async (event) => {
+        //validate
+
+        // let data = {
+        //     email: email,
+        //     password: password,
+        //     username: username,
+        //     role: role,
+        //     userImage: image,
+        // };
+        // console.log(data);
+        const data = new FormData();
+        data.append('email', email);
+        data.append('password', password);
+        data.append('username', username);
+        data.append('role', role);
+        data.append('userImage', image);
+
+        let res = await axios.post(
+            'http://localhost:8081/api/v1/participant',
+            data
+        );
+        console.log('check res: ', res);
+    };
+
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
-                Launch demo modal
-            </Button>
-
             <Modal
                 className="modal-add-user"
                 size="xl"
@@ -119,7 +147,9 @@ const ModelCreateUser = (props) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button
+                        variant="primary"
+                        onClick={() => handleSubmitCreateUser()}>
                         Save
                     </Button>
                 </Modal.Footer>
