@@ -76,8 +76,6 @@ const ModalUpdateUser = (props) => {
         }
     };
 
-    console.log('data update', dataUpdate);
-
     return (
         <>
             <Modal
