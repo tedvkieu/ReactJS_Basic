@@ -12,6 +12,10 @@
             border: 1px solid green;
         }
         .admin-main {
+            .user_pagination {
+                display: flex;
+                justify-content: center;
+            }
         }
     }
 }
