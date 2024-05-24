@@ -61,7 +61,6 @@ const ModelCreateUser = (props) => {
             role,
             image
         );
-        console.log('check res: ', data);
         if (data && data.EC === 0) {
             toast.success(data.EM);
             handleClose();

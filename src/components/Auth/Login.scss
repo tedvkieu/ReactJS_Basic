@@ -3,6 +3,21 @@
         height: 45px;
         text-align: right;
         border: 1px solid red;
+        padding: 5px 100px;
+        align-items: center;
+        justify-content: flex-end;
+
+        button {
+            padding: 3px 15px;
+            border-radius: 5px;
+            background: #f9f9f9;
+            margin-left: 15px;
+            border: 1px solid;
+
+            &:hover {
+                background: white;
+            }
+        }
     }
     .title {
         font-size: 25px;
@@ -27,6 +42,12 @@
             border-radius: 5px;
             color: white;
             background: black;
+        }
+    }
+    .text-center {
+        .back {
+            cursor: pointer;
+            text-decoration: underline;
         }
     }
 }
