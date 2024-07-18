@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './Layout';
+import 'nprogress/nprogress.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

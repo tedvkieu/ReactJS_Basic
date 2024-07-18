@@ -5,9 +5,11 @@ import { postLogin } from '../../services/apiServices';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { doLogin } from '../../redux/action/userAction';
+import { ImSpinner } from 'react-icons/im';
 const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoadingData, setIsLoadingData] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -32,17 +34,22 @@ const Login = (props) => {
             return;
         }
 
+
+        setIsLoadingData(true);
+
         // Submit
         let data = await postLogin(email, password);
 
         if (data && data.EC === 0) {
             dispatch(doLogin(data));
             toast.success(data.EM);
+            setIsLoadingData(false);
             navigate('/');
         }
 
         if (data && +data.EC !== 0) {
             toast.error(data.EM);
+            setIsLoadingData(false);
         }
     };
     return (
@@ -82,8 +89,10 @@ const Login = (props) => {
                     <div>
                         <button
                             className="btn-submit"
-                            onClick={() => handleLogin()}>
-                            Login to Tedvkieu
+                            onClick={() => handleLogin()}
+                            disabled={isLoadingData}>
+                            {isLoadingData === true && <ImSpinner className="loaderIcon" />}
+                            <span>Login to Tedvkieu</span>
                         </button>
                     </div>
                     <div className="text-center">
