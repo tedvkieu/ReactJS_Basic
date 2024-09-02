@@ -1,7 +1,8 @@
 import axios from 'axios';
-import nProgress from 'nprogress';
+//import nProgress from 'nprogress';
 import NProgress from 'nprogress';
 import { FaCloudShowersHeavy } from 'react-icons/fa';
+import { store } from '../redux/store';
 
 NProgress.configure({
     showSpinner: false,
@@ -14,8 +15,9 @@ const instance = axios.create({
 
 // Add a request interceptor
 instance.interceptors.request.use(
-    
     function (config) {
+        const access_token = store?.getState()?.user?.account?.access_token;
+        config.headers['Authorization'] = 'Bearer ' + access_token;
         NProgress.start();
         // Do something before request is sent
         return config;
@@ -28,7 +30,6 @@ instance.interceptors.request.use(
 
 // Add a response interceptor
 instance.interceptors.response.use(
-    
     function (response) {
         NProgress.done();
         console.log('instanceptor: >>>', response);
