@@ -3,7 +3,7 @@ import { getQuizByUser } from '../../services/apiServices';
 import './ListQuiz.scss';
 import { useNavigate } from 'react-router-dom';
 const ListQuiz = (props) => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [arrQuiz, setArrQuiz] = useState([]);
 
     useEffect(() => {
@@ -19,7 +19,8 @@ const ListQuiz = (props) => {
     };
     return (
         <div className="list-quiz-container container">
-            {arrQuiz && arrQuiz.length > 0 &&
+            {arrQuiz &&
+                arrQuiz.length > 0 &&
                 arrQuiz.map((quiz, index) => {
                     return (
                         <div
@@ -32,13 +33,17 @@ const ListQuiz = (props) => {
                                 alt="Card image cap"
                             />
                             <div className="card-body">
-                                <h5 className="card-title">Card title</h5>
-                                <p className="card-text">
-                                    Some quick example text to build on the card
-                                    title and make up the bulk of the card's
-                                    content.
-                                </p>
-                                <a className="btn btn-primary" onClick = {()=>navigate(`/quiz/${quiz.id}`)}>
+                                <h5 className="card-title">Quiz {index + 1}</h5>
+                                <p className="card-text">{quiz.description}</p>
+                                <a
+                                    className="btn btn-primary"
+                                    onClick={() =>
+                                        navigate(`/quiz/${quiz.id}`, {
+                                            state: {
+                                                quizTitle: quiz.description,
+                                            },
+                                        })
+                                    }>
                                     Go somewhere
                                 </a>
                             </div>
