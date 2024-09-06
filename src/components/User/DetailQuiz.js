@@ -75,7 +75,6 @@ const DetailQuiz = (props) => {
                 }
                 return item;
             });
-            console.log(b);
         }
         let index = dataQuizClone.findIndex(
             (item) => +item.questionId === +questionId
@@ -83,6 +82,33 @@ const DetailQuiz = (props) => {
         if (index > -1) {
             dataQuizClone[index] = question;
             setDataQuiz(dataQuizClone);
+        }
+    };
+
+    const handleFinishQuiz = () => {
+        console.log('chekc data: ', dataQuiz);
+        let payload = {
+            quizId: +quizId,
+            answers: [],
+        };
+        let answers = [];
+        if (dataQuiz && dataQuiz.length > 0) {
+            dataQuiz.forEach((question) => {
+                let questionId = question.questionId;
+                let userAnswerId = [];
+
+                question.answers.forEach((a) => {
+                    if (a.isSelected === true) {
+                        userAnswerId.push(a.id);
+                    }
+                });
+                answers.push({
+                    questionId: +questionId,
+                    userAnswerId: userAnswerId,
+                });
+            });
+            payload.answers = answers;
+            console.log('payload: ', payload);
         }
     };
 
@@ -120,7 +146,7 @@ const DetailQuiz = (props) => {
                     </button>
                     <button
                         className="btn btn-warning"
-                        onClick={() => handleNext()}>
+                        onClick={() => handleFinishQuiz()}>
                         Finish
                     </button>
                 </div>
