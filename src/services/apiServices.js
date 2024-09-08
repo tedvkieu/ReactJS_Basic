@@ -67,6 +67,10 @@ const postCreateNewQuiz = (description, name, difficulty, image) => {
     return axios.post('api/v1/quiz', data); // da lay duong link local ben file instance
 };
 
+const getAllQuizForAdmin = () => {
+    return axios.get(`/api/v1/quiz/all`);
+};
+
 export {
     postCreateNewUser,
     getAllUsers,
@@ -79,4 +83,5 @@ export {
     getDataQuiz,
     postSubmitQuiz,
     postCreateNewQuiz,
+    getAllQuizForAdmin,
 };
