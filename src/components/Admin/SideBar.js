@@ -18,11 +18,12 @@ import {
     FaHeart,
 } from 'react-icons/fa';
 import { DiReact } from 'react-icons/di';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import sidebarBg from '../../assets/bg2.jpg';
 import './SideBar.scss';
 
 const SideBar = (props) => {
+    const navigate = useNavigate();
     const { image, collapsed, toggled, handleToggleSidebar } = props;
     return (
         <>
@@ -45,7 +46,7 @@ const SideBar = (props) => {
                             whiteSpace: 'nowrap',
                         }}>
                         <DiReact size={'3em'} color={'00bfff'} />
-                        <span>Kieu ne</span>
+                        <span onClick={() => navigate('/')}>Kieu ne </span>
                     </div>
                 </SidebarHeader>
 
@@ -59,11 +60,13 @@ const SideBar = (props) => {
                     <Menu iconShape="circle">
                         <SubMenu icon={<FaGem />} title="Features">
                             <MenuItem>
-                               
                                 Quan Ly Users
                                 <Link to="/admin/manage-user" />
                             </MenuItem>
-                            <MenuItem> Quan Ly Bai Quiz</MenuItem>
+                            <MenuItem>
+                                Quan Ly Bai Quiz
+                                <Link to="/admin/manage-quizzes" />
+                            </MenuItem>
                             <MenuItem> Quan Ly Cau Hoi</MenuItem>
                         </SubMenu>
                     </Menu>
