@@ -67,7 +67,12 @@ const SideBar = (props) => {
                                 Quan Ly Bai Quiz
                                 <Link to="/admin/manage-quizzes" />
                             </MenuItem>
-                            <MenuItem> Quan Ly Cau Hoi</MenuItem>
+                            <MenuItem>
+                                {' '}
+                                Quan Ly Cau Hoi
+                                <Link to="/admin/manage-questions" />
+                            </MenuItem>
+
                         </SubMenu>
                     </Menu>
                 </SidebarContent>
